@@ -1,14 +1,15 @@
+from Board import Board;
+
 class Player(object):
-    def __init__(self):
-        self.name= "undefined"
-        self.pion= "Chat"
+  
+    def __init__(self, name, pion):
+        board = Board()
+        self.name= name
+        self.pion= pion
         self.money= 1500
-        self.position=0
-        
+        self.position = board.cases[0]
         self.proprieteCards=[]
         self.specialCards=[]
-        
-    
    
     def addProrieteCard(self, proprieteCard):
         self.proprieteCards.append(proprieteCard)
@@ -21,6 +22,8 @@ class Player(object):
     
     def removeSpectialCard(self, specialCard):
         self.specialCards.remove(specialCard)
+        
+        
         
     #SETTER    
     def _setName(self, name):

@@ -8,8 +8,10 @@ class Board(object):
             data = json.load(json_file)
             for case in data['cases']:
                 self.cases.append(case)
-                print('Type: ' + case['type'])
-                print('')
-               
+                 
+        #print(self.cases)
         
-        print(self.cases)
+        
+
+#b = Board()
+#print(b.cases[39])
