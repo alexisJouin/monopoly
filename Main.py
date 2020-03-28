@@ -1,17 +1,19 @@
 # coding: utf-8
-#from unidecode import unidecode
+# from unidecode import unidecode
 
-from Board import Board;
-from Player import Player;
+from src.app.models.Board import Board
+from src.app.models.Player import Player
 from random import randrange
 
 
-######## Fonctions ########
-def jeterDes():
-    a = randrange(1,6) 
-    b = randrange(1,6)
-    return a + b
+# Fonctions
+from src.app.services.PlayerService import create_player
 
+
+def jeter_des():
+    a = randrange(1, 6)
+    b = randrange(1, 6)
+    return a + b
 
 
 board = Board()
@@ -22,57 +24,51 @@ print("By Alexis JOUIN et Marianne SEIGNEUR")
 print("************************************")
 
 error = 1
-while(error == 1):
-    #nbPlayers = int(input("Combien de joueurs ? "))
+while error == 1:
+    # nbPlayers = int(input("Combien de joueurs ? "))
     nbPlayers = 2
-    if(nbPlayers<=1 or nbPlayers >6):
+    if nbPlayers <= 1 or nbPlayers > 6:
         print("ERROR min:2  max:6")
         error = 1
     else:
         error = 0
 
-players = []
-for i in range(nbPlayers):
-    print("Nom du joueur ", i+1, " : ")
-    #name = input()
-    name = "Joueur " , i+1
-    print("Pion du joueur ", i+1, " : ")
-    #pion = input()
-    pion = "Pion J", i+1
-    players.append(Player(name, pion))
-    
+players: [Player] = []
+print(nbPlayers)
+for i in range(0, nbPlayers):
+    print(i)
+    # print(create_player('test','test'))
+    name = "Joueur " + str(i + 1)
+    print("Nom du joueur ", i + 1, " : ", name)
+    # name = input()
+    pion = "Pion J" + str(i + 1)
+    print("Pion du joueur ", i + 1, " : ", pion)
+    # pion = input()
+    players.append(create_player(name, pion))
 
-print("************************************")
-print("************************************")
+# print("************************************")
+# print("************************************")
 
 for player in players:
-    print("Bienvenue ", player.name)   
+    print("Bienvenue ", player.name)
     print("Position : ", player.position)
-    
+
 endGame = False
 turn = 1
-while endGame==False:
-    print("************************************")
-    print("Tour n°",turn)
-    for player in players:
-        print(player.name, " à toi de jouer. Press d pour jeter les dés")
-        input()
-        scoreDes = jeterDes()
-        print("Score : ", scoreDes )
-        position = player.position["position"] + scoreDes
-        #Gestion du tour complet du plateau
-        if(position >= 40):
-            position = position - 40
-        player._setPosition(board.cases[position])
-        print(player.position)
-        print(player.position["type"])
-        #Menu choix pendant un tour
-        print("Acheter ")
-    turn = turn + 1
-    print("************************************")
-        
-        
-    
-
-
-
+# while not endGame:
+#     print("************************************")
+#     print("Tour n°", turn)
+#     for player in players:
+#         print(player.name, " à toi de jouer. Press d pour jeter les dés")
+#         input()
+#         scoreDes = jeter_des()
+#         print("Score : ", scoreDes)
+#         tempPosition = player.position["position"] + scoreDes
+#         position = tempPosition if tempPosition >= 40 else tempPosition - 40
+#         player.position(board.cases[position])
+#         print(player.position)
+#         print(player.position["type"])
+#         # Menu choix pendant un tour
+#         print("Acheter ")
+#     turn = turn + 1
+#     print("************************************")
